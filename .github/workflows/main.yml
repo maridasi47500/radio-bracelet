@@ -8,8 +8,22 @@ on:
   pull_request:
     branches:
       - main
-
 jobs:
+  build:
+    name: hello ca va
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3.3' # Specify your Ruby version
+      - name: Install Bundler
+        run: gem install bundler
+      - name: Install Dependencies
+        run: bundle install
+      - name: Run Rails Commands
+        run: bundle exec rails db:migrate
   rails-scaffold:
     name: Generate Rails Scaffolds
     runs-on: ubuntu-latest
@@ -31,12 +45,23 @@ jobs:
         run: |
           git config --global user.name "Anonni Mousse"
           git config --global user.email "1146153+maridasi47500@users.noreply.github.com"
+      - name: salut ruby on rails
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3.3' # Specify your Ruby version
+      - name: Install Bundler
+        run: gem install bundler
+      - name: Install Dependencies
+        run: bundle install
+      - name: Run Rails Commands
+        run: bundle exec rails db:migrate
+
       - name: Generate Rails scaffolds
         run: |
-          rails generate scaffold Physician name:string
-          rails generate scaffold Patient name:string
-          rails generate scaffold Appointment physician:references patient:references appointment_date:datetime
-          rails db:migrate
+          bundle exec rails generate scaffold Physician name:string
+          bundle exec rails generate scaffold Patient name:string
+          bundle exec rails generate scaffold Appointment physician:references patient:references appointment_date:datetime
+          bundle exec rails db:migrate
 
       - name: Run tests (optional)
         env:
