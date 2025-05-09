@@ -8,8 +8,22 @@ on:
   pull_request:
     branches:
       - main
-
 jobs:
+  build:
+    name: hello ca va
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0' # Specify your Ruby version
+      - name: Install Bundler
+        run: gem install bundler
+      - name: Install Dependencies
+        run: bundle install
+      - name: Run Rails Commands
+        run: bundle exec rails db:migrate
   rails-scaffold:
     name: Generate Rails Scaffolds
     runs-on: ubuntu-latest
