@@ -27,7 +27,10 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v3
-
+      - name: my anonymous name
+        run: |
+          git config --global user.name "Anonni Mousse"
+          git config --global user.email "1146153+maridasi47500@users.noreply.github.com"
       - name: Generate Rails scaffolds
         run: |
           rails generate scaffold Physician name:string
