@@ -45,6 +45,13 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.3.3' # Specify your Ruby version
+      - name: Install Bundler
+        run: gem install bundler
+      - name: Install Dependencies
+        run: bundle install
+      - name: Run Rails Commands
+        run: bundle exec rails db:migrate
+
       - name: Generate Rails scaffolds
         run: |
           bundle exec rails generate scaffold Physician name:string
